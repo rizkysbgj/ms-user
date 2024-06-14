@@ -3,6 +3,7 @@ const express = require('express');
 const knex = require('knex');
 
 const routes = require('./routes');
+const { services, repositories, errorHandlers } = require('./middlewares')
 
 const config = {
   database: {
@@ -21,45 +22,10 @@ app.listen(3000, () => {
   console.log(`Server Started at ${3000}`)
 });
 
-const UserRepository = require('./repositories/UserRepository')
-
-const initRepo = (req, res, next) => {
-  const db = knex({
-    client: 'mysql2',
-    connection: {
-      host: config.database.host,
-      user: config.database.user,
-      password: config.database.password,
-      database: config.database.name
-    }
-  });
-
-  const userRepository = new UserRepository({ db });
-
-  Object.assign(res.locals, {
-    userRepository
-  });
-
-  next();
-}
-
-const UserService = require('./services/UserService');
-
-const initService = (req, res, next) => {
-  const { locals: { userRepository }} = res;
-  const userService = new UserService({ userRepository });
-
-  Object.assign(res.locals, {
-    userService
-  });
-
-  next();
-}
-
-
 app.use(
   '/', 
-  initRepo,
-  initService,
-  routes
+  repositories,
+  services,
+  routes,
+  errorHandlers
 );
