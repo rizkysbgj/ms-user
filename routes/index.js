@@ -1,3 +1,4 @@
 const user = require('./user');
+const otp = require('./otp');
 
-module.exports = [user];
+module.exports = [user, otp];
