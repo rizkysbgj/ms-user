@@ -4,13 +4,20 @@ class UserRepository {
   }
   
   async saveUser(payload) {
-    const createdUser = await this.db('users').insert({
+    const [id] = await this.db('users').insert({
       ...payload,
       createdAt: new Date(),
       modifiedAt: new Date()
     });
 
-    return createdUser;
+    return id;
+  }
+
+  async getUserById(id) {
+    const [user] = await this.db('users')
+      .where({ id });
+
+    return user;
   }
 }
 

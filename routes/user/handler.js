@@ -1,4 +1,4 @@
-const addUserHandler = async (req, res) => {
+const addUserHandler = async (req, res, next) => {
     const {
       body
     } = req;
@@ -8,9 +8,13 @@ const addUserHandler = async (req, res) => {
       },
     } = res;
   
-    const createdUser = await userService.addAccount(body);
-  
-    res.send(createdUser);
+    try {
+      const createdUser = await userService.addAccount(body);
+    
+      res.send(createdUser);
+    } catch (error) {
+      next(error);
+    }
 };
 
 module.exports = {

@@ -1,4 +1,4 @@
-const initOtpHandler = async (req, res) => {
+const initOtpHandler = async (req, res, next) => {
   const {
     body
   } = req;
@@ -8,9 +8,13 @@ const initOtpHandler = async (req, res) => {
     },
   } = res;
 
-  const otp = await otpService.initOtp(body);
-
-  res.send(otp);
+  try {
+    const otp = await otpService.initOtp(body);
+  
+    res.send(otp);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const validateOtpHandler = async (req, res, next) => {
