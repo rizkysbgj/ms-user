@@ -36,6 +36,18 @@ class UserService {
       throw error;
     }
   }
+
+  async getUserByUserId(userId) {
+    try {
+      const user = await this.userRepository.getUserByUserId(userId);
+
+      return user;
+    } catch (error) {
+      console.log(error, 'failed to get user');
+
+      throw error;
+    }
+  }
 }
 
 module.exports = UserService;

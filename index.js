@@ -3,7 +3,7 @@ const express = require('express');
 
 const routes = require('./routes');
 const { services, repositories, errorHandlers } = require('./middlewares')
-const PORT = 3002;
+const PORT = 3003;
 
 const app = express();
 

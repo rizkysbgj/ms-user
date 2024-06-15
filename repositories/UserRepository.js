@@ -19,6 +19,13 @@ class UserRepository {
 
     return user;
   }
+
+  async getUserByUserId(userId) {
+    const [user] = await this.db('users')
+      .where({ userId });
+
+    return user;
+  }
 }
 
 module.exports = UserRepository;
