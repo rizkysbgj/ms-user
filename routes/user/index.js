@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { addUserHandler } = require('./handler')
+const { createUserHandler } = require('./handler')
 
 router.post(
   '/users', 
-  addUserHandler
+  createUserHandler
 );
 
 module.exports = router;

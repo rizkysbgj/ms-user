@@ -14,7 +14,7 @@ class UserService {
     return validator.isEmail(email);
   }
 
-  async addAccount(payload) {
+  async createUser(payload) {
     const { email, phoneNumber } = payload;
 
     try {
